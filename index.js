@@ -15,13 +15,17 @@ app.use(cors());
 
 app.use(express.json());
 
-app.post("/api/users", (req, res) => {
+app.get("/", (req, res) => {
+    res.json("Server is running");
+});
+
+app.post("/add/users", (req, res) => {
     UserModel.create(req.body)
         .then((users) => res.json(users))
         .catch((err) => res.json(err));
 });
 
-app.get("/", (req, res) => {
+app.get("/fetch/items", (req, res) => {
     ItemModel.find({})
         .then((items) => res.json(items))
         .catch((err) => res.json(err));
