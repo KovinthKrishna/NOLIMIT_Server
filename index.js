@@ -15,7 +15,7 @@ if (process.env.URL) {
     app.use(
         cors({
             origin: ["https://nolimit-kovinth.vercel.app"],
-            methods: ["POST", "GET"],
+            methods: ["POST", "GET", "PUT", "DELETE"],
             credentials: true,
         })
     );
