@@ -11,17 +11,14 @@ mongoose.connect(process.env.URL ?? localURL);
 
 const PORT = 3000;
 const app = express();
-if (process.env.URL) {
-    app.use(
-        cors({
-            origin: ["https://nolimit-kovinth.vercel.app"],
-            methods: ["POST", "GET", "PUT", "DELETE"],
-            credentials: true,
-        })
-    );
-} else {
-    app.use(cors());
-}
+
+app.use(
+    cors({
+        origin: process.env.URL ? process.env.WEBSITE_URL : "*",
+        methods: ["POST", "GET", "PUT", "DELETE"],
+        credentials: true,
+    })
+);
 
 app.use(express.json());
 
