@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
 
 app.post("/add/users", (req, res) => {
     UserModel.create(req.body)
-        .then((users) => res.json(users))
+        .then(res.json("Subscribed"))
         .catch((err) => res.json(err));
 });
 
@@ -39,22 +39,31 @@ app.get("/fetch/items", (req, res) => {
 });
 
 app.post("/add/items", (req, res) => {
-    ItemModel.create(req.body)
-        .then((items) => res.json(items))
+    const id = req.body.id;
+    ItemModel.findOne({ id: id })
+        .then((item) => {
+            if (item) {
+                res.json("Already in cart!");
+            } else {
+                ItemModel.create(req.body)
+                    .then(res.json("Item added successfully."))
+                    .catch((err) => res.json(err));
+            }
+        })
         .catch((err) => res.json(err));
 });
 
 app.put("/update/items/:id", (req, res) => {
     const id = req.params.id;
     ItemModel.findByIdAndUpdate({ _id: id }, { count: req.body.count })
-        .then((items) => res.json(items))
+        .then(res.json("Item updated successfully."))
         .catch((err) => res.json(err));
 });
 
 app.delete("/delete/items/:id", (req, res) => {
     const id = req.params.id;
     ItemModel.findByIdAndDelete({ _id: id })
-        .then((items) => res.json(items))
+        .then(res.json("Item deleted successfully."))
         .catch((err) => res.json(err));
 });
 
