@@ -162,7 +162,7 @@ Frontend setup:
 
 Branch mapping:
 - frontend `master` → Node.js backend (this repository)
-- frontend `spring-boot` → Spring Boot backend (provide link in section above)
+- frontend `spring-boot` → Spring Boot backend (https://github.com/KovinthKrishna/NolimitServer)
 
 ---
 
